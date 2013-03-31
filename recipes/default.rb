@@ -53,7 +53,6 @@ execute "import cdr database schema" do
 end
 
 execute "grant permissions on cdr database to freepbx user" do
-  command "mysql -p#{node['mysql']['server_root_password']} #{cdr_database} < SQL/cdr_mysql_table.sql"
   command "mysql -p#{node['mysql']['server_root_password']} -D mysql -r -B -N -e \"GRANT ALL ON #{cdr_database}.* TO '#{freepbx_user}'@'localhost' IDENTIFIED BY '#{freepbx_password}'\""
 # mysql> GRANT ALL PRIVILEGES ON asteriskcdrdb.* TO asteriskuser@localhost IDENTIFIED BY 'amp109';
 end
